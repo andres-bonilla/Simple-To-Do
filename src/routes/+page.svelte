@@ -1,2 +1,40 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+  let todo = {
+    id: "",
+    text: "",
+    state: false
+  }, todoList = []
+  const addTodo = ()=>{
+    if (todo.text.trim()){
+      todo.id = Date.now()
+      todoList = [ ...todoList, todo]
+      todo = {
+        id: "",
+        text: "",
+        state: false
+      }
+    }
+    todo.text = ""
+  }
+  $: console.log(todo.text)
+</script>
+
+<main> 
+  <h1>Simple TO-DO</h1>
+  
+  <form on:submit|preventDefault={ addTodo }>
+    <input 
+    type="text" 
+    placeholder="Add task..." 
+    bind:value= {todo.text}
+    />
+  </form>
+
+  {#each todoList as item}
+    <div>
+      <p>
+        {item.text}
+      </p>
+    </div>
+  {/each}
+</main>
