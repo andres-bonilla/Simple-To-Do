@@ -1,4 +1,5 @@
 <script>
+  import Task from '../components/task.svelte';
   import { browser } from '$app/environment';
 
   let todo = {
@@ -19,7 +20,7 @@
     }
     todo.text = ""
   }
-  
+
   const removeTask = id => {
     todoList = todoList.filter( task => 
 		  task.id !== id
@@ -37,7 +38,7 @@
   if (browser && localStorage.getItem("todos") )
     todoList = JSON.parse( localStorage.getItem( "todos" ) ) || todoList
   
-  $: browser 
+  $:browser 
     ? localStorage.setItem("todos", JSON.stringify( todoList ) ) 
     : console.log("Browser ERROR")
 </script>
@@ -53,25 +54,11 @@
     />
   </form>
 
-  {#each todoList as item}
-    <div class= {item.state ? "task-on taskBox" : "task-off taskBox"}>
-      <p>
-        {item.text}
-      </p>
-      <div class="buttons">
-        <button class="inlineButton" on:click={() => { checkTask( item.id ) }}>
-          { #if item.state }
-          <img src="src/essets/on.svg" alt="onIcon"/>
-          {:else}
-          <img src="src/essets/off.svg" alt="offIcon"/>
-          {/if}
-        </button>
-        <button class="inlineButton" on:click={()=>{ removeTask( item.id )}}>
-          <img src="src/essets/trash.svg" alt="trashIcon"/>
-        </button>
-      </div>
-    </div>
-  {/each}
+  <ul>
+    {#each todoList as item}
+      <Task { item } { checkTask } { removeTask }/>
+    {/each}
+  </ul>
 </main>
 
 <style lang="scss">
@@ -90,52 +77,9 @@
   input {
     width: 50%;
     min-width: 270px;
-    padding: 10px 12px;
+    padding: 8px 12px;
     border-radius:12px;
     margin-bottom: 24px;
-    font-size: 20px;
-  }
-  p {
-    width: 70%;
-    margin: 12px 0px 12px 12px;
     font-size: 22px;
-    font-weight: 400;
-    text-align: left;
-  }
-  .taskBox {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 65%;
-    min-width: 340px;
-    border-radius:12px;
-  }
-  .task-off {
-    margin: 7px auto;
-    border: 2px solid rgb(255, 62, 0);
-    background: rgb(255, 238, 228);
-    p {
-      color: rgb(255, 62, 0);
-    }
-  }
-
-  .task-on {
-    margin: 8px auto;
-    border: 1px solid rgb(255, 62, 0);
-    background: rgb(255, 248, 244);
-    p {
-      color: rgb(255, 191, 169)
-    }
-  }
-  .inlineButton {
-    display:inline-block;
-    all: unset;
-    cursor: pointer;
-    img {
-      margin-right: 15px;
-    }
-  }
-  .inlineButton:active {
-    background:#fff6f1;
   }
 </style>
