@@ -41,20 +41,21 @@
     width: 65%;
     min-width: 340px;
     border-radius:12px;
-    background-color: #fbf5f3;
   }
   .task-off {
+    background-color: hsl(221, 37%, 80%)/*#fbf5f3*/;
     margin: 7px auto;
-    border: 2px solid rgb(255, 62, 0);
+    border: 2px solid #34373c/*rgb(255, 62, 0)*/;
     p {
-      color: rgb(255, 62, 0);
+      color: hsl(220, 7%, 22%)/*rgb(255, 62, 0)*/;
     }
   }
   .task-on {
+    background-color: hsl(221, 37%, 45%)/*#fbf5f3*/;
     margin: 8px auto;
-    border: 1px solid rgb(255, 62, 0);
+    border: 2px solid /*rgb(255, 62, 0)rgba(255, 191, 169, 0.3)*/#34373c;
     p {
-      color: rgb(255, 191, 169)
+      color: #34373c
     }
   }
   .inlineButton {

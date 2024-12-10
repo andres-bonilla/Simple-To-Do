@@ -81,5 +81,7 @@
     border-radius:12px;
     margin-bottom: 24px;
     font-size: 22px;
+
+    border: 2px solid rgb(255, 62, 0);
   }
 </style>
